@@ -1,0 +1,93 @@
+.signupContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-image: url('src/assets/cooking-background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.formContainer {
+  background-color: rgba(255, 255, 255, 0.9); /* Slight transparency */
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  width: 100%;
+  max-width: 400px;
+  text-align: left; /* Align content to the left */
+}
+
+.signupHeading {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.inputGroup {
+  margin-bottom: 1.25rem;
+  position: relative; /* To position the icon later */
+}
+
+.inputGroup label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  color: #555;
+  text-align: left; /* Left align the label */
+}
+
+.inputField[type="password"],
+.inputField[type="email"] {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  background-color: #fff;
+  box-sizing: border-box; /* Ensures padding is part of the width calculation */
+}
+
+.inputField:focus {
+  outline: none;
+  border-color: #D27D2D;
+  box-shadow: 0 0 0 3px rgba(210, 125, 45, 0.1);
+}
+
+.signupButton {
+  width: 100%;
+  padding: 0.75rem;
+  background: #D27D2D;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 0.5rem;
+}
+
+.signupButton:hover {
+  background: #b56722;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(210, 125, 45, 0.2);
+}
+
+.errorMessage {
+  display: flex;
+  justify-content: center;
+  color: red;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .formContainer {
+    padding: 1.5rem;
+    width: 90%;
+  }
+}

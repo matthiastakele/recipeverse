@@ -1,0 +1,212 @@
+html, body {
+    height: 100%; /* Ensure the body and html elements fill the entire height of the screen */
+    margin: 0; /* Remove default margins */
+    background-image: url('src/assets/cooking-background.jpg');
+    background-size: cover; /* Make sure the background image covers the whole screen */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    background-attachment: fixed;
+  }  
+
+.signinContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  .signinBox {
+    display: flex;
+    width: 100%;
+    max-width: 800px;
+    min-height: 450px; /* Reduced height */
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+  }
+  
+  .leftSection {
+    flex: 1;
+    background: linear-gradient(135deg, #D27D2D 0%, #CC5500 100%);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .leftContent {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: white;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  
+  .leftSection h1 {
+    font-size: 1.8rem; /* Slightly smaller */
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: white;
+  }
+  
+  .leftSection p {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+    opacity: 0.9;
+  }
+  
+  .rightSection {
+    flex: 1;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .formContainer {
+    max-width: 300px; /* Slightly narrower */
+    margin: 0 auto;
+    width: 100%;
+  }
+  
+  .signinHeading {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  
+  .inputGroup {
+    margin-bottom: 1.25rem;
+    position: relative; /* Added for icon positioning */
+  }
+  
+  .inputGroup label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    color: #555;
+    font-weight: 500;
+  }
+  
+  .inputField[type="password"],
+  .inputField[type="email"] {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+    background-color: #fff;
+  }
+  
+  .inputField:focus {
+    outline: none;
+    border-color: #D27D2D;
+    box-shadow: 0 0 0 3px rgba(210, 125, 45, 0.1);
+  }
+  
+  .passwordWrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    position: relative; /* Keep this for proper containment */
+  }
+  
+  .passwordWrapper .inputField {
+    width: 100%;
+    padding-right: 2.5rem; /* Make space for the icon */
+  }
+  
+  .passwordToggle {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    padding: 0;
+    color: #666;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .passwordToggle:hover {
+    color: #D27D2D;
+  }
+  
+  .signinButton {
+    width: 100%;
+    padding: 0.75rem;
+    background: #D27D2D;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 0.5rem;
+  }
+  
+  .signinButton:hover {
+    background: #b56722;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(210, 125, 45, 0.2);
+  }
+  
+  .signupButton {
+    padding: 0.75rem 1.5rem;
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 1.5px solid rgba(255, 255, 255, 0.3);
+    border-radius: 6px;
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(4px);
+  }
+  
+  .signupButton:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-1px);
+  }
+
+  .errorMessage {
+    display: flex;
+    justify-content: center;
+    color: red;
+    font-size: 0.9rem;
+  }
+  
+  @media (max-width: 768px) {
+    .signinBox {
+      flex-direction: column;
+      min-height: auto;
+      margin: 1rem;
+    }
+  
+    .leftSection,
+    .rightSection {
+      width: 100%;
+      padding: 1.5rem;
+    }
+  
+    .leftSection {
+      padding: 2rem 1.5rem;
+    }
+  
+    .formContainer {
+      max-width: 100%;
+    }
+  }

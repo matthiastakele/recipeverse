@@ -1,0 +1,76 @@
+/* src/components/Navbar.module.css */
+.navbar {
+    width: 100%;
+    background-color:#D27D2D;  /* Green color */
+    padding: 15px 20px;  /* Add some padding */
+    display: flex;
+    justify-content: space-between; /* Align items on both sides */
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Keep the navbar on top */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  }
+  
+  .navbar .logo {
+    font-size: 1.5rem;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  
+  .navbar ul {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .navbar li {
+    margin: 0 15px;
+  }
+  
+  .navbar a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  
+  .navbar a:hover {
+    color: #e0e0e0; /* Light gray color on hover */
+  }
+  
+  .navbar .menu-toggle {
+    display: none; /* Hide the menu toggle by default (for responsive design) */
+  }
+  
+  /* Responsive Navbar */
+  @media (max-width: 768px) {
+    .navbar ul {
+      display: none; /* Hide menu links on smaller screens */
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 10px;
+    }
+  
+    .navbar .menu-toggle {
+      display: block; /* Show the menu toggle */
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+  
+    .navbar.active ul {
+      display: flex; /* Show menu links when the navbar is active */
+    }
+  
+    .navbar a {
+      padding: 10px 0;
+      border-bottom: 1px solid #e0e0e0;
+    }
+  }
+  
