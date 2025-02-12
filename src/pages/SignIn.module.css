@@ -1,11 +1,6 @@
 html, body {
     height: 100%; /* Ensure the body and html elements fill the entire height of the screen */
     margin: 0; /* Remove default margins */
-    background-image: url('src/assets/cooking-background.jpg');
-    background-size: cover; /* Make sure the background image covers the whole screen */
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat; /* Prevent the image from repeating */
-    background-attachment: fixed;
   }  
 
 .signinContainer {

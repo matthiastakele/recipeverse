@@ -26,6 +26,7 @@ const handleSubmit = async (e: React.FormEvent) => {
 
     navigate("/home"); // Redirect to home or any other page after successful sign-in
   } catch (error: any) {
+    console.log(error.code)
     // Handle Firebase authentication errors with user-friendly messages
     switch (error.code) {
       case "auth/user-not-found":

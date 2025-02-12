@@ -12,6 +12,11 @@ body {
   line-height: 1.6;
   margin: 0;
   padding: 0;
+  background-image: url('/assets/cooking-background.jpg');
+  background-size: cover; /* Make sure the background image covers the whole screen */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+  background-attachment: fixed;
 }
 
 h1, h2, h3, h4, h5, h6 {
