@@ -29,14 +29,8 @@ const handleSubmit = async (e: React.FormEvent) => {
     console.log(error.code)
     // Handle Firebase authentication errors with user-friendly messages
     switch (error.code) {
-      case "auth/user-not-found":
-        setError("No user found with this email. Please check and try again.");
-        break;
-      case "auth/invalid-password":
-        setError("Incorrect password. Please try again.");
-        break;
-      case "auth/invalid-email":
-        setError("Please enter a valid email address.");
+      case "auth/invalid-credential":
+        setError("Incorrect email or password. Please try again.");
         break;
       default:
         setError("An error occurred. Please try again.");

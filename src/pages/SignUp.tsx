@@ -29,12 +29,16 @@ const SignUp: React.FC = () => {
       navigate("/home"); // Redirect on success
     } catch (error: any) {
       // Handle Firebase authentication errors with user-friendly messages
+      console.log(error.code);
       switch (error.code) {
         case "auth/email-already-in-use":
           setError("This email is already in use. Please try another one.");
           break;
         case "auth/invalid-email":
           setError("Please enter a valid email address.");
+          break;
+        case "auth/weak-password":
+          setError("Please enter a password with at least six characters")
           break;
         case "auth/missing-email":
           setError("Email is required.");
