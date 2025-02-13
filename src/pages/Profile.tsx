@@ -1,34 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaHeart } from "react-icons/fa";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 import styles from "./Profile.module.css";
 import homeStyles from "./Home.module.css";
-import { db } from '../firebase';
-import { doc, getDoc } from "firebase/firestore";
 
 const Profile: React.FC = () => {
-  const [user, _] = useState<any>(null);
   const [likedRecipes, setLikedRecipes] = useState<any[]>([]);
   const navigate = useNavigate();
 
+  // Fetch liked recipes from localStorage on page load
   useEffect(() => {
-    if (user) {
-      const fetchLikedRecipes = async () => {
-        try {
-          const userDocRef = doc(db, "users", user.uid);
-          const userDocSnapshot = await getDoc(userDocRef);
-
-          if (userDocSnapshot.exists()) {
-            const userData = userDocSnapshot.data();
-            setLikedRecipes(userData.likedRecipes || []);
-          }
-        } catch (error) {
-          console.error("Error fetching liked recipes:", error);
-        }
-      };
-      fetchLikedRecipes();
+    const storedLikedRecipes = localStorage.getItem("likedRecipes");
+    console.log("Stored liked recipes from localStorage:", storedLikedRecipes);  // Debugging line
+    if (storedLikedRecipes) {
+      setLikedRecipes(JSON.parse(storedLikedRecipes));
+    } else {
+      setLikedRecipes([]); // Fallback in case no liked recipes are found
     }
-  }, [user]);
+  }, []);
 
   const handleRecipeClick = (recipe: any) => {
     navigate(`/recipe/${recipe.Title.replace(/\s+/g, "-").toLowerCase()}`, {
@@ -42,30 +31,29 @@ const Profile: React.FC = () => {
   // Toggle like/unlike for a recipe
   const toggleLike = (recipe: any) => {
     setLikedRecipes((prevLikedRecipes) => {
+      let updatedLikedRecipes;
       if (prevLikedRecipes.some((likedRecipe) => likedRecipe.Title === recipe.Title)) {
-        const updatedLikedRecipes = prevLikedRecipes.filter(
+        updatedLikedRecipes = prevLikedRecipes.filter(
           (likedRecipe) => likedRecipe.Title !== recipe.Title
         );
-        localStorage.setItem("likedRecipes", JSON.stringify(updatedLikedRecipes)); // Save to localStorage
-        return updatedLikedRecipes;
       } else {
-        const updatedLikedRecipes = [...prevLikedRecipes, recipe];
-        localStorage.setItem("likedRecipes", JSON.stringify(updatedLikedRecipes)); // Save to localStorage
-        return updatedLikedRecipes;
+        updatedLikedRecipes = [...prevLikedRecipes, recipe];
       }
+      
+      // Save updated liked recipes to localStorage
+      localStorage.setItem("likedRecipes", JSON.stringify(updatedLikedRecipes));  
+      return updatedLikedRecipes;
     });
   };
 
   return (
     <div className={homeStyles.container}>
-      {/* Profile Page Title */}
       <h1 className={styles.profileTitle}>Your Liked Recipes</h1>
 
-      {/* Display recipes */}
       {likedRecipes.length === 0 ? (
         <p className={styles.noRecipesMessage}>
         You have no liked recipes yet.{" "}
-        <a onClick={() => navigate("/home")}>Go back to explore recipes</a>
+        <a href="/" onClick={() => navigate("/home")}>Go back to explore recipes</a>
       </p>
       ) : (
         <div className={homeStyles.grid}>
@@ -79,7 +67,6 @@ const Profile: React.FC = () => {
                 <h3>{recipe.Title}</h3>
               </div>
 
-              {/* Like Button outside recipeCardContent */}
               <div className={homeStyles.likeButtonWrapper}>
                 <button
                   onClick={(e) => {
