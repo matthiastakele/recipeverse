@@ -53,7 +53,7 @@ const Profile: React.FC = () => {
       {likedRecipes.length === 0 ? (
         <p className={styles.noRecipesMessage}>
         You have no liked recipes yet.{" "}
-        <a href="/" onClick={() => navigate("/home")}>Go back to explore recipes</a>
+        <a onClick={() => navigate("/home")}>Go back to explore recipes</a>
       </p>
       ) : (
         <div className={homeStyles.grid}>
