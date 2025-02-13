@@ -177,4 +177,33 @@
     margin-bottom: 8px;
     width: 80%;
   }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .recipeCard {
+    padding: 12px;
+  }
+
+  .recipeCard img {
+    height: 150px;
+  }
+
+  .paginationContainer {
+    display: flex;
+    text-align: center;
+    margin-top: 20px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+
+  .paginationContainer span {
+    font-size: 1rem;
+  }
+
+  .likeButton svg {
+    width: 28px;
+    height: 28px;
+  }
 }
