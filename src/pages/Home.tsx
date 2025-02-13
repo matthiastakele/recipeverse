@@ -95,7 +95,7 @@ const Home: React.FC = () => {
       });
 
       // Calculate scores for each recipe
-      const scoredRecipes = recipes.map((recipe, index) => {
+      const scoredRecipes = recipes.map((recipe) => {
         const textToSearch =
           filterType === "title"
             ? recipe.Title.toLowerCase()
@@ -107,9 +107,9 @@ const Home: React.FC = () => {
         let totalScore = 0;
         query.forEach(term => {
           if (term.length > 0) {
-            tfidf.tfidfs(term, (_, score) => {
+            tfidf.tfidfs(term, (termData) => {
               if (textToSearch.includes(term)) {
-                totalScore += score;
+                totalScore += termData; // termData is the score here
               }
             });
           }
