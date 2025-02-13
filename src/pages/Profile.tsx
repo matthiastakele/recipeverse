@@ -3,18 +3,32 @@ import { useNavigate } from "react-router-dom";
 import { FaHeart } from "react-icons/fa";
 import styles from "./Profile.module.css";
 import homeStyles from "./Home.module.css";
+import { db } from '../firebase';
+import { doc, getDoc } from "firebase/firestore";
 
 const Profile: React.FC = () => {
+  const [user, _] = useState<any>(null);
   const [likedRecipes, setLikedRecipes] = useState<any[]>([]);
   const navigate = useNavigate();
 
-  // Fetch liked recipes from localStorage on page load
   useEffect(() => {
-    const storedLikedRecipes = localStorage.getItem("likedRecipes");
-    if (storedLikedRecipes) {
-      setLikedRecipes(JSON.parse(storedLikedRecipes));
+    if (user) {
+      const fetchLikedRecipes = async () => {
+        try {
+          const userDocRef = doc(db, "users", user.uid);
+          const userDocSnapshot = await getDoc(userDocRef);
+
+          if (userDocSnapshot.exists()) {
+            const userData = userDocSnapshot.data();
+            setLikedRecipes(userData.likedRecipes || []);
+          }
+        } catch (error) {
+          console.error("Error fetching liked recipes:", error);
+        }
+      };
+      fetchLikedRecipes();
     }
-  }, []);
+  }, [user]);
 
   const handleRecipeClick = (recipe: any) => {
     navigate(`/recipe/${recipe.Title.replace(/\s+/g, "-").toLowerCase()}`, {

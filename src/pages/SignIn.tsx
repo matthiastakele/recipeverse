@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import '../index.scss';
 import styles from "./SignIn.module.css";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebaseConfig"; // Correct import for Firebase auth
+import { auth } from "../firebase"; // Correct import for Firebase auth
 
 const SignIn: React.FC = () => {
   const [email, setEmail] = useState("");

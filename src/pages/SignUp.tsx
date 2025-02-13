@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./SignUp.module.css"; // Assuming the stylesheet is named SignUp.module.css
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebaseConfig"; // Import Firebase auth
+import { doc, setDoc } from 'firebase/firestore';
+import { db, auth } from '../firebase';
 
 const SignUp: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -24,7 +25,13 @@ const SignUp: React.FC = () => {
       // Attempt to create a user with Firebase
       setError(""); // Clear any previous errors
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      console.log("User registered:", userCredential.user);
+      const userId = userCredential.user.uid;
+
+      // Create a new document for the user in Firestore
+      await setDoc(doc(db, 'users', userId), {
+        email: email,  // Store the user's email
+        likedRecipes: [],  // Initialize likedRecipes as an empty array
+      });
   
       navigate("/home"); // Redirect on success
     } catch (error: any) {

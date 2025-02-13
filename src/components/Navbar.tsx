@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { auth } from "../firebaseConfig"; // Import Firebase auth
+import { auth } from "../firebase"; // Import Firebase auth
 import { signOut } from "firebase/auth";
 import styles from "./Navbar.module.css"; // Import the styles
 

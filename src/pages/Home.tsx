@@ -4,6 +4,8 @@ import Papa from "papaparse";
 import "../index.scss";
 import styles from "./Home.module.css";
 import { FaHeart, FaRegHeart, FaRedo } from "react-icons/fa";
+import { db, auth } from '../firebase';
+import { doc, setDoc } from 'firebase/firestore';
 
 
 const Home: React.FC = () => {
@@ -125,19 +127,33 @@ const Home: React.FC = () => {
     }
   };
 
-  const toggleLike = (recipe: any) => {
+  const toggleLike = async (recipe: any) => {
     setLikedRecipes((prevLikedRecipes) => {
       let updatedLikedRecipes;
+      
       if (prevLikedRecipes.some((likedRecipe) => likedRecipe.Title === recipe.Title)) {
         updatedLikedRecipes = prevLikedRecipes.filter((likedRecipe) => likedRecipe.Title !== recipe.Title);
       } else {
         updatedLikedRecipes = [...prevLikedRecipes, recipe];
       }
   
-      // Save updated liked recipes to localStorage
-      localStorage.setItem("likedRecipes", JSON.stringify(updatedLikedRecipes));
+      // Now update Firebase
+      updateLikedRecipesInFirestore(updatedLikedRecipes);
+  
       return updatedLikedRecipes;
     });
+  };
+  
+  const updateLikedRecipesInFirestore = async (updatedLikedRecipes: any) => {
+    const user = auth.currentUser;
+    
+    if (user) {
+      const userId = user.uid;
+      const userRef = doc(db, 'users', userId);
+      await setDoc(userRef, {
+        likedRecipes: updatedLikedRecipes
+      });
+    }
   };
 
   return (
