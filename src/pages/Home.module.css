@@ -5,7 +5,7 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 columns */
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   justify-content: center;
 }
@@ -15,6 +15,7 @@
   padding: 15px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  border: 0.2em solid #D27D2D;
   cursor: pointer;
   transition: transform 0.2s ease-in-out;
 }
@@ -35,21 +36,21 @@
 }
 
 .paginationContainer span {
-  font-size: 1.2rem;  /* Increase font size */
+  font-size: 1.2rem;
   font-weight: bold;
   background-color: white;
-  padding: 0.4em 0.75em; /* Adjust padding for better shape */
-  border-radius: 20px; /* More rounded edges */
+  padding: 0.4em 0.75em;
+  border-radius: 20px;
   color: black;
-  margin: 0 15px; /* Add spacing */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  border: 1px solid #D27D2D; /* Optional: Thin border to match theme */
+  margin: 0 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border: 0.15em solid #D27D2D;
 }
 
 .searchContainer {
   display: flex;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
   gap: 12px;
   width: 100%;
   max-width: 1400px;
@@ -65,13 +66,13 @@
   border: 2px solid #D27D2D;
   border-radius: 30px;
   outline: none;
-  box-shadow: 0 4px 6px rgba(210, 125, 45, 0.2);  /* Soft orange shadow */
-  transition: all 0.3s ease;  /* Smooth transition */
+  box-shadow: 0 4px 6px rgba(210, 125, 45, 0.2);
+  transition: all 0.3s ease;
 }
 
 .searchBar:focus {
-  border-color: #D27D2D;  /* Ensures border stays orange on focus */
-  box-shadow: 0 4px 10px rgba(210, 125, 45, 0.4);  /* Stronger shadow on focus */
+  border-color: #D27D2D;
+  box-shadow: 0 4px 10px rgba(210, 125, 45, 0.4);
 }
 
 .filterButtonContainer {
@@ -82,7 +83,7 @@
 }
 
 .filterButton {
-  padding: 6px 12px;  /* Adjusted padding to make buttons smaller */
+  padding: 6px 12px;
   font-size: 0.95rem;
   font-weight: 600;
   background: white;
@@ -93,14 +94,16 @@
   transition: all 0.2s ease;
   white-space: nowrap;
   text-align: center;
-  min-width: 100px;  /* Ensure buttons have a minimum width */
-  max-width: 150px;  /* Prevent buttons from stretching too wide */
+  min-width: 100px;
+  max-width: 150px;
 }
 
-
 .filterButton:hover {
+  background: white;
+}
+
+.filterButton.active:hover {
   background: #D27D2D;
-  color: white;
 }
 
 .active {
@@ -108,6 +111,56 @@
   color: white;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+.likeButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.likeButton:hover {
+  background: none;
+  transform: scale(1.1);
+}
+
+.likeButton svg {
+  width: 32px;
+  height: 32px;
+  fill: #F88379;
+  transition: all 0.3s ease;
+}
+
+.refreshButton {
+  margin-bottom: 12px;
+  padding: 8px;  /* Equal padding for a circular shape */
+  font-size: 1rem;  /* Adjust font size for better fit */
+  font-weight: 600;
+  background: white;
+  color: #D27D2D;
+  border: 2px solid #D27D2D;
+  border-radius: 50%;  /* Make it circular */
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+  width: 40px;  /* Fixed width for circular shape */
+  height: 40px;  /* Fixed height to match width */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.refreshButton:hover {
+  background: white;
+}
+
+.refreshButton svg {
+  transition: transform 0.2s ease;
+  width: 24px;  /* Adjust size of the icon */
+  height: 24px;  /* Adjust size of the icon */
+}
+
 
 @media (max-width: 768px) {
   .searchContainer {

@@ -1,0 +1,41 @@
+.profileTitle {
+    font-size: 2rem;  /* Larger font size */
+    font-weight: bold;  /* Make the title bold */
+    color: black;       /* Black text color */
+    background-color: white;  /* White background */
+    padding: 0.3em 0.7em; /* Adjust padding for better shape */
+    border-radius: 20px; /* More rounded edges */
+    margin-top: 0.5em;    /* Add some space above the title */
+    margin-bottom: 1em; /* Add space below the title */
+    text-align: center;  /* Center-align the text */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    border: 0.1em solid #D27D2D; /* Orange border */
+    display: inline-block;
+  }
+
+  .noRecipesMessage {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #D27D2D; /* A soft orange color that fits the theme */
+    text-align: center;
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.9); /* Light background for contrast */
+    border: 1px solid #D27D2D;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow to lift it */
+    max-width: 400px;
+    margin: 40px auto; /* Center the message and add some space around */
+  }
+  
+  .noRecipesMessage a {
+    color: #D27D2D; /* Same theme color */
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  
+  .noRecipesMessage a:hover {
+    color: #f88379; /* Lighter shade of orange when hovered */
+  }
+  

@@ -1,27 +1,25 @@
 import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import '../index.scss';
+import "../index.scss";
 import styles from "./Recipe.module.css";
 
 const cleanIngredients = (ingredientsStr: string) => {
-    const withoutBrackets = ingredientsStr.slice(1, -1);
+  const withoutBrackets = ingredientsStr.slice(1, -1);
 
-    const ingredients = withoutBrackets.split(/',\s*'/)
-      .map(ingredient => {
-        return ingredient.replace(/^'|'$/g, '').trim();
-      })
-      .filter(ingredient => ingredient);
+  const ingredients = withoutBrackets
+    .split(/',\s*'/)
+    .map((ingredient) => {
+      return ingredient.replace(/^'|'$/g, "").trim();
+    })
+    .filter((ingredient) => ingredient);
 
-    return ingredients;
-  };
-  
-  
-  
+  return ingredients;
+};
 
-const RecipePage: React.FC = () => {
+const Recipe: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const recipe = location.state?.recipe;
+  const { recipe } = location.state || {};
 
   useEffect(() => {
     // Scroll to top when the page is rendered
@@ -33,15 +31,20 @@ const RecipePage: React.FC = () => {
     return (
       <div className={styles.recipePage}>
         <h1>Recipe not found</h1>
-        <button onClick={() => navigate('/')}>
-          Return to Recipes
-        </button>
+        <button onClick={() => navigate("/")}>Return to Recipes</button>
       </div>
     );
   }
 
+  const handleBack = () => {
+    if (location.state?.from) {
+      navigate(location.state.from); // Navigate back to the previous page
+    } else {
+      navigate("/"); // Default to home if no previous page is recorded
+    }
+  };
+
   const ingredients = cleanIngredients(recipe.Cleaned_Ingredients);
-  console.log(ingredients);
 
   return (
     <div className={styles.recipePage}>
@@ -52,7 +55,6 @@ const RecipePage: React.FC = () => {
       />
 
       <div className="mt-6">
-
         <h2>Ingredients</h2>
         <ul>
           {ingredients.map((ingredient: string, index: number) => (
@@ -64,19 +66,14 @@ const RecipePage: React.FC = () => {
       <div className="mt-6">
         <br></br>
         <h2>Instructions</h2>
-        {recipe.Instructions.split('\n').map((step: string, index: number) => (
+        {recipe.Instructions.split("\n").map((step: string, index: number) => (
           <p key={index}>{step}</p>
         ))}
       </div>
 
-      <button 
-        className="actionButton"
-        onClick={() => navigate('/home')}
-      >
-        Back to Recipes
-      </button>
+      <button className="actionButton" onClick={handleBack}> Back to Recipes </button>
     </div>
   );
 };
 
-export default RecipePage;
+export default Recipe;

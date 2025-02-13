@@ -2,7 +2,7 @@
 .navbar {
     width: 100%;
     background-color:#D27D2D;  /* Green color */
-    padding: 15px 20px;  /* Add some padding */
+    padding: 10px 15px;  /* Add some padding */
     display: flex;
     justify-content: space-between; /* Align items on both sides */
     align-items: center;
@@ -14,7 +14,7 @@
   }
   
   .navbar .logo {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     color: white;
     font-weight: bold;
     text-decoration: none;
