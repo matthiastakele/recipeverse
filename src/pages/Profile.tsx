@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
 import styles from "./Profile.module.css";
 import homeStyles from "./Home.module.css";
 
