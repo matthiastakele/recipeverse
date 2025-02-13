@@ -48,44 +48,80 @@
 
 .searchContainer {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  margin-bottom: 20px;
+  justify-content: center;
+  align-items: center; 
+  gap: 12px;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+  flex-wrap: nowrap;
 }
 
 .searchBar {
-  flex: 1;
-  padding: 10px;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  flex: 0 1 70%;
+  padding: 12px 20px;
+  font-size: 1.1rem;
+  border: 2px solid #D27D2D;
+  border-radius: 30px;
+  outline: none;
+  box-shadow: 0 4px 6px rgba(210, 125, 45, 0.2);  /* Soft orange shadow */
+  transition: all 0.3s ease;  /* Smooth transition */
 }
 
-.filterButtons {
+.searchBar:focus {
+  border-color: #D27D2D;  /* Ensures border stays orange on focus */
+  box-shadow: 0 4px 10px rgba(210, 125, 45, 0.4);  /* Stronger shadow on focus */
+}
+
+.filterButtonContainer {
   display: flex;
-  gap: 10px;
+  place-items: center;
+  gap: 1em;
+  margin-bottom: 1em;
 }
 
 .filterButton {
-  padding: 8px 16px;
-  font-size: 0.9rem;
-  font-weight: bold;
-  border: none;
-  background: #e0e0e0;
-  color: black;
+  padding: 6px 12px;  /* Adjusted padding to make buttons smaller */
+  font-size: 0.95rem;
+  font-weight: 600;
+  background: white;
+  color: #D27D2D;
+  border: 2px solid #D27D2D;
+  border-radius: 25px;
   cursor: pointer;
-  border-radius: 5px;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  text-align: center;
+  min-width: 100px;  /* Ensure buttons have a minimum width */
+  max-width: 150px;  /* Prevent buttons from stretching too wide */
 }
 
+
 .filterButton:hover {
-  background: #d27d2d;
+  background: #D27D2D;
   color: white;
 }
 
 .active {
-  background: #d27d2d;
+  background: #D27D2D;
   color: white;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .searchContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .searchBar {
+    flex: 1 1 100%;
+    margin-bottom: 12px;
+  }
+
+  .filterButton {
+    margin-bottom: 8px;
+    width: 80%;
+  }
 }

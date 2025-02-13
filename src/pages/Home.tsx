@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Papa from "papaparse";
-import Spinner from "./Spinner"; 
 import "../index.scss";
 import styles from "./Home.module.css";
 
@@ -87,27 +86,27 @@ const Home: React.FC = () => {
   return (
     <div className={styles.container}>
       {loading ? (
-        <Spinner /> 
+        <></>
       ) : (
         <>
           <div className={styles.searchContainer}>
             <input
               type="text"
               placeholder="Search recipes..."
+              className={styles.searchBar}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className={styles.searchBar}
             />
-            <div className={styles.filterButtons}>
-              {["title", "ingredients", "instructions"].map((type) => (
-                <button
-                  key={type}
-                  className={`${styles.filterButton} ${filterType === type ? styles.active : ""}`}
-                  onClick={() => setFilterType(type)}
-                >
-                  {type.charAt(0).toUpperCase() + type.slice(1)}
-                </button>
-              ))}
+              <div className={styles.filterButtonContainer}>
+                {["title", "ingredients", "instructions"].map((type) => (
+                  <button
+                    key={type}
+                    className={`${styles.filterButton} ${filterType === type ? styles.active : ""}`}
+                    onClick={() => setFilterType(type)}
+                  >
+                    {type.charAt(0).toUpperCase() + type.slice(1)}
+                  </button>
+                ))}
             </div>
           </div>
 
