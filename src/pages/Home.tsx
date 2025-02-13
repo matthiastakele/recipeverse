@@ -6,7 +6,7 @@ import styles from "./Home.module.css";
 import { FaHeart, FaRegHeart, FaRedo } from "react-icons/fa";
 import { db, auth } from '../firebase';
 import { doc, setDoc } from 'firebase/firestore';
-
+import { TfIdf } from 'natural';
 
 const Home: React.FC = () => {
   const [recipes, setRecipes] = useState<any[]>([]);
@@ -21,23 +21,21 @@ const Home: React.FC = () => {
   const location = useLocation();
 
   const handleRecipeClick = (recipe: any) => {
-    // Now location.pathname is available here
     navigate(`/recipe/${recipe.Title.replace(/\s+/g, "-").toLowerCase()}`, {
       state: {
         recipe,
-        from: location.pathname, // Pass the current path to the state
+        from: location.pathname,
       },
     });
   };
 
   const shuffleRecipes = () => {
-    const shuffled = [...recipes].sort(() => Math.random() - 0.5); // Shuffle logic
-    setRecipes(shuffled); // Set the shuffled recipes
+    const shuffled = [...recipes].sort(() => Math.random() - 0.5);
+    setRecipes(shuffled);
   };
 
   // Fetch recipes from localStorage or CSV if not found
   useEffect(() => {
-    // Check if data is available in localStorage
     const storedRecipes = localStorage.getItem("recipes");
     const storedLikedRecipes = localStorage.getItem("likedRecipes");
     const storedPage = localStorage.getItem("currentPage");
@@ -47,7 +45,6 @@ const Home: React.FC = () => {
       setRecipes(JSON.parse(storedRecipes));
       setFilteredRecipes(JSON.parse(storedRecipes)); // Store filtered recipes as well
     } else {
-      // Fetch CSV file if no recipes found in localStorage
       fetch("/assets/recipes.csv")
         .then((response) => response.text())
         .then((csvText) => {
@@ -55,10 +52,10 @@ const Home: React.FC = () => {
             header: true,
             skipEmptyLines: true,
             complete: (result) => {
-              const recipes = result.data
+              const recipes = result.data;
               setRecipes(recipes);
               setFilteredRecipes(recipes);
-              localStorage.setItem("recipes", JSON.stringify(recipes)); // Save recipes to localStorage
+              localStorage.setItem("recipes", JSON.stringify(recipes));
             },
           });
         })
@@ -67,45 +64,72 @@ const Home: React.FC = () => {
         });
     }
 
-    // Set the current page, liked recipes, and search query from localStorage if available
-    if (storedPage) {
-      setCurrentPage(Number(storedPage));
-    }
-    if (storedSearchQuery) {
-      setSearchQuery(storedSearchQuery);
-    }
-    if (storedLikedRecipes) {
-      setLikedRecipes(JSON.parse(storedLikedRecipes));
-    }
+    if (storedPage) setCurrentPage(Number(storedPage));
+    if (storedSearchQuery) setSearchQuery(storedSearchQuery);
+    if (storedLikedRecipes) setLikedRecipes(JSON.parse(storedLikedRecipes));
 
     setLoading(false); // Set loading to false once data is fetched
   }, []);
 
-  // Save current page and liked recipes to localStorage when they change
   useEffect(() => {
     localStorage.setItem("currentPage", currentPage.toString());
     localStorage.setItem("likedRecipes", JSON.stringify(likedRecipes));
   }, [currentPage, likedRecipes]);
 
-  // Search functionality
+  // TF-IDF search functionality
   useEffect(() => {
     let filtered = recipes;
     if (searchQuery.trim() !== "") {
-      filtered = recipes.filter((recipe) => {
-        const query = searchQuery.toLowerCase();
-        if (filterType === "title") {
-          return recipe.Title.toLowerCase().includes(query);
-        } else if (filterType === "ingredients") {
-          return recipe.Cleaned_Ingredients.toLowerCase().includes(query);
-        } else if (filterType === "instructions") {
-          return recipe.Instructions.toLowerCase().includes(query);
-        }
-        return false;
+      const tfidf = new TfIdf();
+      const query = searchQuery.toLowerCase().split(" ");
+      
+      // First, add all documents to TF-IDF
+      recipes.forEach((recipe) => {
+        const textToAdd =
+          filterType === "title"
+            ? recipe.Title.toLowerCase()
+            : filterType === "ingredients"
+            ? recipe.Cleaned_Ingredients.toLowerCase()
+            : recipe.Instructions.toLowerCase();
+        tfidf.addDocument(textToAdd);
       });
+
+      // Calculate scores for each recipe
+      const scoredRecipes = recipes.map((recipe, index) => {
+        const textToSearch =
+          filterType === "title"
+            ? recipe.Title.toLowerCase()
+            : filterType === "ingredients"
+            ? recipe.Cleaned_Ingredients.toLowerCase()
+            : recipe.Instructions.toLowerCase();
+
+        // Calculate total TF-IDF score for all query terms
+        let totalScore = 0;
+        query.forEach(term => {
+          if (term.length > 0) {
+            tfidf.tfidfs(term, (_, score) => {
+              if (textToSearch.includes(term)) {
+                totalScore += score;
+              }
+            });
+          }
+        });
+
+        return {
+          recipe,
+          score: totalScore
+        };
+      });
+
+      // Sort by score and filter out zero scores
+      filtered = scoredRecipes
+        .filter(item => item.score > 0)
+        .sort((a, b) => b.score - a.score)
+        .map(item => item.recipe);
     }
+
     setFilteredRecipes(filtered);
-    setCurrentPage(1); // Reset to first page when filtering
-    // Store the search query in localStorage
+    setCurrentPage(1);
     localStorage.setItem("searchQuery", searchQuery);
   }, [searchQuery, filterType, recipes]);
 
@@ -130,29 +154,22 @@ const Home: React.FC = () => {
   const toggleLike = async (recipe: any) => {
     setLikedRecipes((prevLikedRecipes) => {
       let updatedLikedRecipes;
-      
       if (prevLikedRecipes.some((likedRecipe) => likedRecipe.Title === recipe.Title)) {
         updatedLikedRecipes = prevLikedRecipes.filter((likedRecipe) => likedRecipe.Title !== recipe.Title);
       } else {
         updatedLikedRecipes = [...prevLikedRecipes, recipe];
       }
-  
-      // Now update Firebase
       updateLikedRecipesInFirestore(updatedLikedRecipes);
-  
       return updatedLikedRecipes;
     });
   };
-  
+
   const updateLikedRecipesInFirestore = async (updatedLikedRecipes: any) => {
     const user = auth.currentUser;
-    
     if (user) {
       const userId = user.uid;
       const userRef = doc(db, 'users', userId);
-      await setDoc(userRef, {
-        likedRecipes: updatedLikedRecipes
-      });
+      await setDoc(userRef, { likedRecipes: updatedLikedRecipes });
     }
   };
 
@@ -170,13 +187,12 @@ const Home: React.FC = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
-            {/* Refresh Button */}
-        <button
-          className={styles.refreshButton}
-          onClick={shuffleRecipes}
-        >
-          <FaRedo />
-        </button>
+            <button
+              className={styles.refreshButton}
+              onClick={shuffleRecipes}
+            >
+              <FaRedo />
+            </button>
             <div className={styles.filterButtonContainer}>
               {["title", "ingredients", "instructions"].map((type) => (
                 <button
@@ -204,10 +220,9 @@ const Home: React.FC = () => {
                 <h3>{recipe.Title}</h3>
 
                 <div className={styles.likeButtonWrapper}>
-                  {/* Like button (Heart) */}
                   <button
                     onClick={(e) => {
-                      e.stopPropagation(); // Prevent the recipe card click event
+                      e.stopPropagation();
                       toggleLike(recipe);
                     }}
                     className={styles.likeButton}
