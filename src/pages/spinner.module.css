@@ -1,0 +1,32 @@
+/* Spinner.css */
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full height of the viewport */
+    position: fixed; /* Fix it to the screen so it stays visible */
+    top: 0;
+    left: 0;
+    width: 100%; /* Full width of the viewport */
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+    z-index: 9999; /* Ensure it sits above all other elements */
+  }
+  
+  .spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3); /* Light border for the spinner */
+    border-top: 4px solid #d27d2d; /* Darker color for the spinner animation */
+    border-radius: 50%; /* Make it circular */
+    width: 50px; /* Width of the spinner */
+    height: 50px; /* Height of the spinner */
+    animation: spin 1s linear infinite; /* Rotate animation */
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg); /* Initial position */
+    }
+    100% {
+      transform: rotate(360deg); /* Full rotation */
+    }
+  }
+  

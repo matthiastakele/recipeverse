@@ -5,7 +5,8 @@ import Navbar from "./components/Navbar";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Home from "./pages/Home";
-import "./index.css";  // Import global styles
+import Recipe from "./pages/Recipe";
+import "./index.scss";  // Import global styles
 
 const App: React.FC = () => {
   return (
@@ -16,6 +17,7 @@ const App: React.FC = () => {
           <Route path="/" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/recipe/:id" element={<Recipe />} /> {/* Dynamic route */}
         </Routes>
       </div>
     </Router>

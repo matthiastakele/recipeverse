@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import '../index.scss';
 import styles from "./SignIn.module.css";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebaseConfig"; // Correct import for Firebase auth
@@ -88,9 +89,7 @@ const handleSubmit = async (e: React.FormEvent) => {
 
               {error && <p className={styles.errorMessage}>{error}</p>}
 
-              <button type="submit" className={styles.signinButton}>
-                Sign In
-              </button>
+              <button type="submit" className="signinButton">Sign In</button>
             </form>
           </div>
         </div>

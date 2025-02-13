@@ -16,6 +16,7 @@ html, body {
     max-width: 800px;
     min-height: 450px; /* Reduced height */
     background-color: white;
+    opacity: 0.95;
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     overflow: hidden;
@@ -137,26 +138,6 @@ html, body {
   
   .passwordToggle:hover {
     color: #D27D2D;
-  }
-  
-  .signinButton {
-    width: 100%;
-    padding: 0.75rem;
-    background: #D27D2D;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 0.875rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    margin-top: 0.5rem;
-  }
-  
-  .signinButton:hover {
-    background: #b56722;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(210, 125, 45, 0.2);
   }
   
   .signupButton {

@@ -1,0 +1,122 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f9;
+  color: #333;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  padding-top: 3%;
+  background-image: url('/assets/cooking-background.jpg');
+  background-size: cover; /* Make sure the background image covers the whole screen */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+  background-attachment: fixed;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 0.5rem;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Flexbox for centering content */
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Global button style */
+button {
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #4CAF50;
+}
+
+/* Global form inputs */
+input[type="text"],
+input[type="password"] {
+  padding: 10px;
+  margin-bottom: 1rem;
+  width: 250px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  border-color: #4CAF50;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  width: 250px;
+}
+
+.actionButton {
+  padding: 0.75rem;
+  background: #D27D2D;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 0.5rem;
+  box-shadow: 0 4px 12px rgba(210, 125, 45, 0.2);
+}
+
+/* Hover Effect */
+.actionButton:hover {
+  background: #b56722;
+  transform: translateY(-1px);
+}
+
+/* For SignIn Specific Button */
+.signinButton {
+  width: 100%;
+  /* Inherit the base button style */
+  @extend .actionButton; /* This will apply the styles from .button */
+}
+
+.pagination {
+  margin-top: 1.25em;
+  @extend .actionButton
+}
+
+.pagination:disabled {
+  background: #A9A9A9;
+  cursor: not-allowed;
+}
+
+.pagination button {
+  margin: 0 10px;
+  padding: 10px 15px;
+  cursor: pointer;
+}

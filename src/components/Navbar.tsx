@@ -15,6 +15,11 @@ const Navbar: React.FC = () => {
   };
 
   useEffect(() => {
+    if (location.pathname === "/") {
+      signOut(auth)
+        .catch((error) => console.error("Error signing out:", error));
+    }
+
     const unsubscribe = auth.onAuthStateChanged((currentUser) => {
       setUser(currentUser); // Update user state on auth change
     });
