@@ -18,16 +18,3 @@
 |-----------|---------|----------|----------------|
 | React ⚛️  | Node.js 🌿 | CSV Parsing 📊 | Firebase 🔥 |
 | TypeScript 🛠 | Express 🚀 | Firestore 🔥 | JWT Authentication 🔑 |
-
-## 📸 Screenshots
-
-| Home Page | Recipe View | Search Results |
-|-----------|------------|---------------|
-| ![Home](docs/home.png) | ![Recipe](docs/recipe.png) | ![Search](docs/search.png) |
-
-## 🛠 Installation & Setup
-
-### 1️⃣ Clone the repository
-```sh
-git clone https://github.com/matthiastakele/recipeverse.git
-cd recipeverse
