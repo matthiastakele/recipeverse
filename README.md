@@ -1,50 +1,33 @@
-# React + TypeScript + Vite
+# 🍽️ RecipeVerse
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🚀 **A full-stack recipe discovery app with intelligent search and seamless user experience.**  
+🔍 Powered by **TF-IDF** for relevance-ranked recipe search.  
+🛠 Built with **React, TypeScript, Firebase**, and a structured **CSV dataset**.
 
-Currently, two official plugins are available:
+## 🔥 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Advanced Search:** Utilizes **TF-IDF** to rank recipes by relevance, ensuring accurate results.
+- **User Authentication:** Secure login and personalized recipe storage via **Firebase Auth**.
+- **Modern UI/UX:** Sleek, responsive interface designed with **React and TypeScript**.
+- **Efficient Data Handling:** Parses and indexes a large **CSV dataset** for fast retrieval.
+- **State Management:** Optimized component architecture for smooth interactions.
 
-## Expanding the ESLint configuration
+## 🖥️ Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+| Frontend  | Backend  | Database | Authentication |
+|-----------|---------|----------|----------------|
+| React ⚛️  | Node.js 🌿 | CSV Parsing 📊 | Firebase 🔥 |
+| TypeScript 🛠 | Express 🚀 | Firestore 🔥 | JWT Authentication 🔑 |
 
-- Configure the top-level `parserOptions` property like this:
+## 📸 Screenshots
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+| Home Page | Recipe View | Search Results |
+|-----------|------------|---------------|
+| ![Home](docs/home.png) | ![Recipe](docs/recipe.png) | ![Search](docs/search.png) |
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## 🛠 Installation & Setup
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+### 1️⃣ Clone the repository
+```sh
+git clone https://github.com/matthiastakele/recipeverse.git
+cd recipeverse
